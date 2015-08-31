@@ -5,11 +5,12 @@ var router = express.Router()
 //Ensures the angular javascript is served up
 router.use(express.static(__dirname + '/../assets'))
 
-//router.use(express.static(__dirname + '/../layouts'))
+router.use(express.static(__dirname + '/../layouts'))
 
 //Allows the HTML to be served when hitting root context
 router.get('/', function (req, res) {
-  res.sendfile('layouts/dogList.html')
+ // res.sendfile('layouts/dogList.html')
+	res.sendfile('layouts/app.html')
 	
 })
 

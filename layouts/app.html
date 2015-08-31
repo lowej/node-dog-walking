@@ -1,11 +1,24 @@
+<!-- 
+The SPA (Single Page Application).  
+Wraps the other pages which will get loaded in as different views.
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body ng-app='app'>
+<nav class='navbar navbar-default'>
+  <div class='container'>
+    <ul class='nav navbar-nav'>
+      <li><a href="/#/">Dog List</a></li>
+      <li><a href="/#/createDog">Add New Dog</a></li>
+    </ul>
+  </div>
+</nav>
 
-
+<div ng-view></div>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js'></script>
   <!-- Angular code is stored in assets/app.js -->

@@ -1,9 +1,12 @@
+ 
 <!DOCTYPE html>
 <html>
 <head>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body ng-app='app'>
+
+<div ng-view></div>
   <div ng-controller='DogsCtrl' class='container'>
     <h1>The Mutley Crew</h1>
     <ul class='list-group'>
@@ -15,8 +18,15 @@
       </li>
     </ul>
   </div>
+  
+  
   <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
-  <!-- Angular code is stored in assets/app.js -->
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js'></script>
+
+  <!--  Angular code is stored in assets/app.js -->
+  
+
   <script src='/app.js'></script>
 </body>
 </html>
+

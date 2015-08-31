@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</head>
+<body ng-app='app'>
+<div ng-controller='CreateCtrl' class='container'>
+  <form role='form'>
+    <div class="form-group">
+      <label>Dog Name</label>
+      <input class="form-control" type="text" ng-model="dogName">
+    </div>
+    <div class="form-group">
+      <label>Dog Date of Birth</label>
+      <input class="form-control" type="date" ng-model="dogDOB">
+    </div>
+    <div class="form-group">
+      <label>Owner First Name</label>
+      <input class="form-control" type="text" ng-model="ownerFirstName">
+    </div>
+    <div class="form-group">
+      <label>Owner Surname</label>
+      <input class="form-control" type="text" ng-model="ownerSurname">
+    </div>
+    <div class="form-group">
+      <label>Dog Start Date</label>
+      <input class="form-control" type="date" ng-model="dogStartDate">
+    </div>
+    <button ng-click='addDog()' class='btn btn-lg'>Add Dog</button>
+  </form>
+</div>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'></script>
+  <!-- Angular code is stored in assets/app.js -->
+  <script src='/app.js'></script>
+</body>
+</html>

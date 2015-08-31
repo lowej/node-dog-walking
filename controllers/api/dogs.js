@@ -12,8 +12,11 @@ router.get('/api/dogs', function (req, res, next) {
 		res.json(dog)
 	})
 })
+ 
 
 
+//TO DO - Have not got the HTML page or the angularJS setup to call POST for creation yet
+//Only tested from SOAP UI so far.
 //Allows a new dog to be created - HTTP POST REQUEST
 router.post('/api/dog', function(req, res, next){
 	var dog = new Dog({

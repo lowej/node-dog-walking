@@ -15,11 +15,11 @@ angular.module('app').controller('DogsCtrl', function ($scope, DogsSvc) {
 	 
 })
 
-
+ 
 //All creation of dogs from data entry on the screen
 //The ng-click calls the addDog function
 
-angular.module('app').controller('CreateCtrl', function ($scope, DogCreationSvc) {
+angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCreationSvc) {
    
 	$scope.addDog = function(){
 		if($scope.dogName){   //Create the JSON object to send to the service call
@@ -31,6 +31,7 @@ angular.module('app').controller('CreateCtrl', function ($scope, DogCreationSvc)
 			})
 			.success(function (dog){
 				$scope.dogName = null
+				$window.location.href='/#/'  //JL added this to take the user back to list page.  May be a better way of doing this.
 			})
 		}
 	}

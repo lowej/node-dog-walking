@@ -30,8 +30,9 @@ angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCre
 				dogDOB:$scope.dogDOB
 			})
 			.success(function (dog){
-				$scope.dogName = null
-				$window.location.href='/#/'  //JL added this to take the user back to list page.  May be a better way of doing this.
+				$window.location.href='/#/'  
+				//JL added this href to take the user back to list page.  May be a better way of doing this.
+				//Solution is here: http://stackoverflow.com/questions/27941876/how-to-redirect-to-another-page-using-angular-js
 			})
 		}
 	}

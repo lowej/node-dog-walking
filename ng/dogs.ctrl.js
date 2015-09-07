@@ -18,6 +18,7 @@ angular.module('app').controller('DogsCtrl', function ($scope, DogsSvc) {
  
 //All creation of dogs from data entry on the screen
 //The ng-click calls the addDog function
+//Note I added the $window parameter to allow flick back to list after creation
 
 angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCreationSvc) {
    

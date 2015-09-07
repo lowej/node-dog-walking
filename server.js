@@ -13,6 +13,8 @@ app.use(require('./controllers/api/dogs'))
 app.use(require('./controllers/static'))
  
 //Start the Express HTTP server
-app.listen(3000, function () {
-  console.log('Server listening on', 3000)
+var port = process.env.PORT || 3000;
+
+app.listen(port, function () {
+  console.log('Server listening on', port);
 })

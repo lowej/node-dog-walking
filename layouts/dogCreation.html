@@ -1,28 +1,48 @@
 
 <!-- Wrapped by app.html  -->
 
-<div ng-controller='CreateCtrl' class='container'>
-  <form role='form'>
-    <div class="form-group">
-      <label>Dog Name</label>
-      <input class="form-control" type="text" ng-model="dogName">
-    </div>
-    <div class="form-group">
-      <label>Dog Date of Birth</label>
-      <input class="form-control" type="date" ng-model="dogDOB">
-    </div>
-    <div class="form-group">
-      <label>Owner First Name</label>
-      <input class="form-control" type="text" ng-model="ownerFirstName">
-    </div>
-    <div class="form-group">
-      <label>Owner Surname</label>
-      <input class="form-control" type="text" ng-model="ownerSurname">
-    </div>
-    <div class="form-group">
-      <label>Dog Start Date</label>
-      <input class="form-control" type="date" ng-model="dogStartDate">
-    </div>
-    <button ng-click='addDog()' class='btn btn-lg'>Add Dog</button>
-  </form>
-</div>
+<!-- 
+The UpLoadCtrl controller must wrap the CreateCtrl controller so that inherited scope applies.
+When I try and get a handle on the $scope.image in CreateCtrl, this will only work if it can inherit
+the scope from UploadCtrl so that it can "see" the image.
+
+See https://docs.angularjs.org/guide/scope for details on $scope hierarchy
+ -->
+
+
+<div ng-controller="UploadCtrl" class='container'>
+		
+	<label>Dog Photograph</label>
+       <img ng-if="image" ng-src="{{image}}" alt="">
+       <form action="">
+           <input my-upload type="file" name="upload">
+       </form>
+       
+       <div ng-controller='CreateCtrl' class='container'>   
+           <div class="form-group">
+	      <label>Dog Name</label>
+	      <input class="form-control" type="text" ng-model="dogName">
+	    </div>
+	    <div class="form-group">
+	      <label>Dog Date of Birth</label>
+	      <input class="form-control" type="date" ng-model="dogDOB">
+	    </div>
+	    <div class="form-group">
+	      <label>Owner First Name</label>
+	      <input class="form-control" type="text" ng-model="ownerFirstName">
+	    </div>
+	    <div class="form-group">
+	      <label>Owner Surname</label>
+	      <input class="form-control" type="text" ng-model="ownerSurname">
+	    </div>
+	    <div class="form-group">
+	      <label>Dog Start Date</label>
+	      <input class="form-control" type="date" ng-model="dogStartDate">
+	    </div>
+	    <button ng-click='addDog()' class='btn btn-lg'>Add Dog</button>
+	  </form>
+	</div>
+        
+ </div>
+                                                      
+

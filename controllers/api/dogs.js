@@ -23,15 +23,16 @@ router.post('/api/dog', function(req, res, next){
 		dogName: req.body.dogName,
 		ownerFirstName: req.body.ownerFirstName,
 		ownerLastName: req.body.ownerLastName,
-		dogDOB: req.body.dogDOB
+		dogDOB: req.body.dogDOB,
+		dogPicture: req.body.dogPicture
 	})
 	
 	dog.save(function(err, dog){
 		if(err) {return next(err)}
 		
 		console.log('post received');
-		console.log(req.body.dogName)
-		console.log(req.body.ownerFirstName)
+		console.log('Dog Name: ' + req.body.dogName)
+		console.log('Owner First Name: '+ req.body.ownerFirstName)
 		res.status(201).json(dog)
 	})
 })

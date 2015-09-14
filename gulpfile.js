@@ -1,9 +1,10 @@
-var gulp = require('gulp')
-var concat = require('gulp-concat')
-var sourcemaps = require('gulp-sourcemaps')
-var uglify = require('gulp-uglify')
-var ngAnnotate = require('gulp-ng-annotate')
-var nodemon = require('gulp-nodemon')
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
+var ngAnnotate = require('gulp-ng-annotate');
+var nodemon = require('gulp-nodemon');
+var stylus = require('gulp-stylus');
 
 //This task creates the assets/app/js file by merging all the stuff in ng (Angular)
 //Directory together
@@ -32,11 +33,21 @@ gulp.task('dev:server', function () {
 })
 
 
+gulp.task('css', function(){
+	gulp.src('css/**/*.styl')
+	.pipe(stylus())
+	.pipe(gulp.dest('assets'))
+})
+
+gulp.task('watch:css', function(){
+	gulp.watch('css/**/*.styl', ['css']);
+})
+
 //This is the master command that runs EVERYTHING.  
 //1. Builds the system
 //2. Runs the node server
 //NOTE - should add a watch:css task if want CSS style sheets included too.
-gulp.task('dev', ['watch:js', 'dev:server'])
+gulp.task('dev', ['watch:css', 'watch:js', 'dev:server'])
 
 
 

@@ -25,7 +25,8 @@ angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCre
 	$scope.addDog = function(){
 		
 		console.log('Just adding a dog');
-		console.log('$scope.image = ' + $scope.image);  
+		//console.log('$scope.image = ' + $scope.image);
+		console.log('$scope.dogStartDate' + $scope.dogStartDate);
 		//The above line confirms that the image read in upload is also visible when a come to 
 		//submit the entire dog page.  ==> Now need to get images across to the Node service and then saved in Mongo!!
 		
@@ -35,6 +36,7 @@ angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCre
 				ownerFirstName: $scope.ownerFirstName, 
 				ownerLastName: $scope.ownerSurname, 
 				dogDOB:$scope.dogDOB,
+				dogStartDate:$scope.dogStartDate,
 				dogPicture:$scope.image
 			})
 			.success(function (dog){

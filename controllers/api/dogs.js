@@ -24,6 +24,7 @@ router.post('/api/dog', function(req, res, next){
 		ownerFirstName: req.body.ownerFirstName,
 		ownerLastName: req.body.ownerLastName,
 		dogDOB: req.body.dogDOB,
+		dogStartDate: req.body.dogStartDate,
 		dogPicture: req.body.dogPicture
 	})
 	

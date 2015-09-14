@@ -6,10 +6,11 @@
     <h1>The Mutley Crew</h1><img src="./springer.jpg" alt="oh dear">
     <ul class='list-group'>
       <li ng-repeat='dog in dogs' class='list-group-item'>
-      	<span><img src="{{dog.dogPicture}}"</span>  <!-- Just grabs the string from mongo obj and loads as image -->
-        <strong>Dog Name: {{ dog.dogName }}</strong>
+      	<span><img ng-src="{{dog.dogPicture}}"</span>  <!-- Just grabs the string from mongo obj and loads as image -->
+        <h5><strong>Dog Name: {{ dog.dogName }}</strong></h5>
         <span>   Owned by: {{ dog.ownerFirstName }}</span>
         <span> {{ dog.ownerLastName }}</span>
+        <span>      &nbsp;&nbsp;&nbsp;Dog Start Date: {{dog.dogStartDate | date:mediumDate}}</span>
         <span>
       </li>
     </ul>

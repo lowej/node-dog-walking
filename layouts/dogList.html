@@ -7,7 +7,7 @@
     <ul class='list-group'>
       <li ng-repeat='dog in dogs' class='list-group-item'>
       	<span><img ng-src="{{dog.dogPicture}}"</span>  <!-- Just grabs the string from mongo obj and loads as image -->
-        <h5><strong>Dog Name: {{ dog.dogName }}</strong></h5>
+        <h5><strong><a href="/#/editDog?dogName={{ dog.dogName }}"> Dog Name: {{ dog.dogName }}</a></strong></h5>
         <span>   Owned by: {{ dog.ownerFirstName }}</span>
         <span> {{ dog.ownerLastName }}</span>
         <span>      &nbsp;&nbsp;&nbsp;Dog Start Date: {{dog.dogStartDate | date:mediumDate}}</span>

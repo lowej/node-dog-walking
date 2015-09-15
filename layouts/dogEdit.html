@@ -1,0 +1,37 @@
+
+
+<div  class='container'>
+		
+       <img  ng-src="{{dog.dogPicture}}" alt="">
+       
+        <div class="form-group">
+	      <label>Dog Name: </label>
+	     <label>{{dog.dogName}}</label>
+	    </div>
+	    <div class="form-group">
+	      <label>Dog DOB: </label>
+	     <label>{{dog.dogDOB  | date:mediumDate}}</label>
+	    </div>
+	    <div class="form-group">
+	      <label>Owner First Name: </label>
+	     <label>{{dog.ownerFirstName}}</label>
+	    </div>
+	    <div class="form-group">
+	      <label>Dog Last Name: </label>
+	     <label>{{dog.ownerLastName}}</label>
+	    </div>
+	     <div class="form-group">
+	      <label>Dog Start Date: </label>
+	     <label>{{dog.dogStartDate | date:mediumDate}}</label>
+	    </div>
+	    <div class="form-group">
+	      <label>Dog ID: </label>
+	     <label>{{dog._id}}</label>
+	    </div>
+	    
+	    <a class='btn btn-lg' href="/#/deleteDog?dogId={{ dog._id }}"> Delete Dog</a>
+	 
+      
+ </div>
+ 
+ 

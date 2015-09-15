@@ -10,6 +10,9 @@
 angular.module('app').controller('DogsCtrl', function ($scope, DogsSvc) {
    
 	DogsSvc.fetch().success(function (dogs) {
+		
+		console.log('Total Number of dogs is: ' + dogs.length);
+			
 		  $scope.dogs = dogs
 		})
 	 
@@ -69,5 +72,35 @@ angular.module('app').controller('UploadCtrl', ['$scope', function ($scope) {
                 }
             };
         }]);
+
+
+
+//Controller to take the selected dog and show an edit page for that dog
+angular.module('app').controller('EditCtrl', function ($location, $scope, DogsGetOneSvc) {
+ 
+	//Get the dog name from the query string - TODO - make this the dog unique ID In future.
+	var searchObject = $location.search();
+	
+	//Search database for dog with this name
+	//Show dog details on the screen
+	
+	DogsGetOneSvc.fetch(searchObject.dogName).success(function (dog) {
+		  $scope.dog = dog
+		})
+})
+
+//Controller to delete the selected dog from the database
+angular.module('app').controller('DeleteCtrl', function ($location, $scope, DogsDeleteSvc) {
+ 
+	//Get the dog ID from the query string
+	var searchObject = $location.search();
+	
+	//Remove the dog from the database
+	DogsDeleteSvc.delete(searchObject.dogId).success(function (dog) {
+		  $scope.dog = dog
+		})
+	
+})
+
 
 

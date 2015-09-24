@@ -64,4 +64,12 @@ router.post('/api/dog', function(req, res, next){
 	})
 })
 
-module.exports = router
+
+
+module.exports = router;
+
+//Added this as a placeholder function to start experimenting with cucumber.  My add_dog.steps.js expects a funtion
+//Named getList to be available.  I need this for it to work.
+module.exports.getList = function(){
+	return "stuff";
+}

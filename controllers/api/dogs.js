@@ -1,6 +1,7 @@
 
 /////////////////////////////////////////////////
 //Node controller for serving up the business services to presentation tier
+//HTTP RESTful API 
 
 var Dog = require('../../models/dog')
 var router = require('express').Router()
@@ -66,10 +67,46 @@ router.post('/api/dog', function(req, res, next){
 
 
 
+
+
+
+
+//Added this as a placeholder function to start experimenting with cucumber.  My add_dog.steps.js expects a function
+//Named getDogById to be available.  I need this for it to work.
+
+getDogById = function(dogId){
+	
+	console.log('BEFORE call back initiate with: ' + dogId);
+	
+//	var dgToReturn = {dogName: 'Test', 
+//        	ownerFirstName: 'Dog',
+//        	ownerLastName: 'In-line',
+//        	dogDOB: '01-02-2010',
+//        	dogStartDate: '12-03-2014'};
+//	
+//	return dgToReturn;
+	
+	
+	
+	 Dog.findOne({dogName: 'Jasper'}, function (err, dog) {
+		
+		//The issue is that the wrapping function returns before this call back function
+		//even starts to execute.  We're going to have to call back from within the callback??
+		console.log('INSIDE call back with ' + dogId);
+	    
+		globalDog = dog;
+		
+		console.log('dog.dogName: ' + dog.dogName);
+		console.log('globalDog.dogName: ' + globalDog.dogName);
+	  });
+	 
+	
+};
+
 module.exports = router;
 
-//Added this as a placeholder function to start experimenting with cucumber.  My add_dog.steps.js expects a funtion
-//Named getList to be available.  I need this for it to work.
-module.exports.getList = function(){
-	return "stuff";
-}
+//How to export a function form a Javascript module (file).  
+module.exports.getDogById = getDogById;
+
+
+

@@ -16,6 +16,55 @@ describe('controllers.api.dogs', function () {
   })
 })
 
+
+var globalDog;
+
+//Currently just setup harness.  Checks that the api exists
+describe('controllers.api.dogs - test get by ID function', function () {
+ 
+	beforeEach(function (done) {
+	      var dogs = [
+	        {dogName: 'Florence', 
+	        	ownerFirstName: 'Jimmy',
+	        	ownerLastName: 'Hill',
+	        	dogDOB: '01-02-2010',
+	        	dogStartDate: '12-03-2014',
+	        	dogPicture: dogPic },
+	        	{dogName: 'Jasper', 
+		        	ownerFirstName: 'Billy',
+		        	ownerLastName: 'TwoRivers',
+		        	dogDOB: '01-01-2011',
+		        	dogStartDate: '10-10-2013'}
+	      ]
+	      Dog.create(dogs, done);
+	          
+	    })
+	
+	
+	    
+	    
+	it('responds with a dog by a specific ID', function(){
+		
+		var dogId = 1234;
+		
+		console.log("BEFORE function call: " + globalDog);
+		
+		ctrl.getDogById(dogId);
+		
+		//Uh Oh - the callback inside the function above has not been called before we get here
+		console.log("AFTER function call: " + globalDog);
+		//expect(globalDog).to.not.be.undefined;
+		
+		
+		
+
+	})
+})
+
+
+
+
+
 //Clear the database before starting the tests - use direct DB access to do this
 describe('controllers.api.dogs', function () {
   beforeEach(function(done){
@@ -36,27 +85,50 @@ describe('controllers.api.dogs', function () {
 	        	dogDOB: '01-02-2010',
 	        	dogStartDate: '12-03-2014',
 	        	dogPicture: dogPic },
-	        	{dogName: 'Jasper', 
-		        	ownerFirstName: 'Billy',
-		        	ownerLastName: 'TwoRivers',
-		        	dogDOB: '01-01-2011',
-		        	dogStartDate: '10-10-2013'}
+        	{dogName: 'Jasper', 
+	        	ownerFirstName: 'Billy',
+	        	ownerLastName: 'TwoRivers',
+	        	dogDOB: '01-01-2011',
+	        	dogStartDate: '10-10-2013',
+	        	walks: {
+	        		walkArray: [
+	        		           {
+	        		        	   walkDate: '01-10-2015',
+	        		        	   walkTime: '30'
+	        		           	},
+	        		        	{
+	        		        		walkDate: '02-10-2015',
+		        		        	walkTime: '60'
+	        		        	}
+	        		           ]
+	        		
+	        	}}
 	      ]
 	      Dog.create(dogs, done);
+	            
+	      
 	    })
 	    
 	    
 	    
 	  it('responds with a single, and correct dog when searched with name', function (done) {
+		  
+		  
 		  //Lazy way of calling the API, should be a way of programatically adding the query param
-	      api.get('/api/dog?dogNameParam=Florence')
+	      api.get('/api/dog?dogNameParam=Jasper')
 	      .expect(200)
 	      .expect(function (response) {
 	    	//Check that the dog name matches
-	        expect(response.body.dogName).to.equal("Florence");
+	        expect(response.body.dogName).to.equal("Jasper");
 	        
 	        //Check that owner name matches
-	        expect(response.body.ownerFirstName).to.equal("Jimmy");
+	        expect(response.body.ownerFirstName).to.equal("Billy");
+	        
+	        //Check that the walkArray is present and correct
+	        expect(response.body.walks.walkArray[0].walkDate).to.not.be.undefined;
+	        expect(response.body.walks.walkArray[0].walkDate).to.equal('2015-01-10T00:00:00.000Z');
+	        expect(response.body.walks.walkArray[1].walkTime).to.not.be.undefined;
+	        expect(response.body.walks.walkArray[1].walkTime).to.equal('60');
 	      })
 	      .end(done)
 	    })

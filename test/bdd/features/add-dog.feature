@@ -11,4 +11,4 @@ Feature: Admin can add a Dog to their Dog List
   Scenario: Dog accessible from dog list
     Given I have an empty dog list
     When I add a dog to the list
-    Then I can access that dog from the dog list
+    Then I can access that dog from the dog list by ID

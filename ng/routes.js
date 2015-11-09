@@ -10,5 +10,6 @@ angular.module('app')
   .when('/createDog', { controller: 'CreateCtrl', templateUrl: 'dogCreation.html' })
   .when('/editDog', { controller: 'EditCtrl', templateUrl: 'dogEdit.html'})
    .when('/deleteDog', { controller: 'DeleteCtrl', templateUrl: 'dogList.html'})
+   .when('/updateDog', { controller: 'UpdateCtrl', templateUrl: 'dogList.html'})
 })
 

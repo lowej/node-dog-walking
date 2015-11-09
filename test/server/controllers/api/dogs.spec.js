@@ -93,11 +93,11 @@ describe('controllers.api.dogs', function () {
 	        	walks: {
 	        		walkArray: [
 	        		           {
-	        		        	   walkDate: '01-10-2015',
+	        		        	   walkDate: '10-01-2015',
 	        		        	   walkTime: '30'
 	        		           	},
 	        		        	{
-	        		        		walkDate: '02-10-2015',
+	        		        		walkDate: '10-02-2015',
 		        		        	walkTime: '60'
 	        		        	}
 	        		           ]
@@ -126,7 +126,12 @@ describe('controllers.api.dogs', function () {
 	        
 	        //Check that the walkArray is present and correct
 	        expect(response.body.walks.walkArray[0].walkDate).to.not.be.undefined;
-	        expect(response.body.walks.walkArray[0].walkDate).to.equal('2015-01-10T00:00:00.000Z');
+	        var date = new Date(response.body.walks.walkArray[0].walkDate);
+	        console.log(date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear());
+	        expect(date.getDate()).to.equal(1);
+	        expect(date.getMonth()).to.equal(9);
+	        expect(date.getFullYear()).to.equal(2015);
+	        
 	        expect(response.body.walks.walkArray[1].walkTime).to.not.be.undefined;
 	        expect(response.body.walks.walkArray[1].walkTime).to.equal('60');
 	      })

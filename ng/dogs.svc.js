@@ -53,3 +53,14 @@ angular.module('app').service('DogsDeleteSvc', function ($http) {
 	
   }
 })
+
+
+//Delete a single dog from the store by ID
+angular.module('app').service('DogsUpdateSvc', function ($http) {
+ 
+	
+	  
+	console.log('Inside the angular service layer.  Have been asked to update dog ');
+	 
+
+})

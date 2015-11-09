@@ -1,4 +1,15 @@
 
+ 
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 5px;
+}
+</style>
 
 <div  class='container'>
 		
@@ -29,7 +40,31 @@
 	     <label>{{dog._id}}</label>
 	    </div>
 	    
+	    <table cellpadding="5" border="3" style="width:100%">
+	    	<tr>
+	    		<td><h5>Walk Date</h5></td>
+	    		<td><h5>Time Walk Took (Minutes)</h5></td>
+	    		<td><h5>Remove</h5></td>
+	    	</tr>
+	    	<tr ng-repeat='n in dog.walks.walkArray'>
+	    		
+	    		<!-- moment stuff to get date formatting to work when bound to date object in the walk -->	
+	    		<td><input type="text"  class="datepicker" ng-model="n.walkDate" mo-date-input="DD-MMM-YYYY"/></td>
+	    		    		
+	    		<td>{{n.walkTime}}</td>
+	    		<td><button class="remove" ng-click="removeWalk($index)">-</button></td>
+	    	</tr>
+	    </table>
+	    
+	    <button  ng-click="addNewWalk()">Add New Walk</button>
+	
+	    
+	   <br>
+	   <br>
+	   <br>
+	   <br>
 	    <a class='btn btn-lg' href="/#/deleteDog?dogId={{ dog._id }}"> Delete Dog</a>
+	    <a ng-show="hasUpdatedWalk()" class='btn btn-lg' href="/#/updateDog?dogId={{ dog._id }}"> Save Walks</a>
 	 
       
  </div>

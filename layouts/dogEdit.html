@@ -46,7 +46,7 @@ th, td {
 	    		<td><h5>Time Walk Took (Minutes)</h5></td>
 	    		<td><h5>Remove</h5></td>
 	    	</tr>
-	    	<tr ng-repeat='n in dog.walks.walkArray'>
+	    	<tr ng-style="getRowColour()" ng-repeat='n in dog.walks.walkArray'>
 	    		
 	    		<!-- moment stuff to get date formatting to work when bound to date object in the walk -->	
 	    		<td><input type="text"  class="datepicker" ng-model="n.walkDate" mo-date-input="DD-MMM-YYYY"/></td>
@@ -56,7 +56,8 @@ th, td {
 	    	</tr>
 	    </table>
 	    
-	    <button  ng-click="addNewWalk()">Add New Walk</button>
+	    <button  class='btn btn-lg' ng-click="addNewWalk()">Add New Walk</button>
+	    <button ng-show="hasUpdatedWalk()" class='btn btn-lg' ng-click="saveWalks()">Save Walks</button>
 	
 	    
 	   <br>
@@ -64,8 +65,6 @@ th, td {
 	   <br>
 	   <br>
 	    <a class='btn btn-lg' href="/#/deleteDog?dogId={{ dog._id }}"> Delete Dog</a>
-	    <a ng-show="hasUpdatedWalk()" class='btn btn-lg' href="/#/updateDog?dogId={{ dog._id }}"> Save Walks</a>
-	 
       
  </div>
  

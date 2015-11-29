@@ -46,6 +46,9 @@ router.delete('/api/dog', function(req, res, next){
 
 //Allows a new dog to be created - HTTP POST REQUEST
 router.post('/api/dog', function(req, res, next){
+	
+	
+	
 	var dog = new Dog({
 		dogName: req.body.dogName,
 		ownerFirstName: req.body.ownerFirstName,
@@ -66,7 +69,19 @@ router.post('/api/dog', function(req, res, next){
 })
 
 
+//Allows a dog to be updated - HTTP PUT REQUEST
+router.put('/api/dog/:id', function(req, res, next){
 
+	console.log('Inside the REST call with ID: ' + req.params.id);
+	
+	//The trick was using findByIdAndUpdate 
+	//however this is just saving walks as it stands, woudld be better to save the entire dog
+	Dog.findByIdAndUpdate(req.params.id, { $set: { walks: req.body.walks }}, function (err, tank) {
+		  if (err) return handleError(err);
+		  res.status(200).json(Dog);
+		});
+	
+})
 
 
 

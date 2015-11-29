@@ -55,12 +55,21 @@ angular.module('app').service('DogsDeleteSvc', function ($http) {
 })
 
 
-//Delete a single dog from the store by ID
+//Update a dog already in the database
 angular.module('app').service('DogsUpdateSvc', function ($http) {
  
 	
+  this.update = function (dog) {
 	  
-	console.log('Inside the angular service layer.  Have been asked to update dog ');
+		console.log('Inside the angular service layer.  Have been asked to save dog: ' + dog.dogName); 
+		 
+		//Trick here was to pass the dog across using the "data" tag
+		return $http({
+			url: '/api/dog/'+dog._id, 
+			method: "PUT",
+			data:dog
+		})
+	  }
 	 
 
 })

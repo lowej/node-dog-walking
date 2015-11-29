@@ -138,10 +138,10 @@ angular.module('app').controller('UploadCtrl', ['$scope', function ($scope) {
 
 
 //Controller to take the selected dog and show an edit page for that dog
-angular.module('app').controller('EditCtrl', function ($location, $scope, DogsGetOneSvc) {
+angular.module('app').controller('EditCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateSvc) {
  
 	//TO DO - is this variable thread safe???
-	var hasNewWalk = false;
+	var walksAreEdited = false;
 	
 	//Get the dog name from the query string - TODO - make this the dog unique ID In future.
 	var searchObject = $location.search();
@@ -157,7 +157,7 @@ angular.module('app').controller('EditCtrl', function ($location, $scope, DogsGe
 	//Add a new walk line to the table
 	$scope.addNewWalk = function() {
 		
-		hasNewWalk = true;
+		walksAreEdited = true;
 		var currentWalkCount = $scope.dog.walks.walkArray.length;
 		var today = new Date();
 		
@@ -171,6 +171,8 @@ angular.module('app').controller('EditCtrl', function ($location, $scope, DogsGe
 	//Remove a walk line from the table
 	$scope.removeWalk = function(index) {
 		
+		walksAreEdited = true;
+		
 	    console.log('Going to remove walk from list at position: ' + index);
 		
 		$scope.dog.walks.walkArray.splice(index, 1);
@@ -179,8 +181,33 @@ angular.module('app').controller('EditCtrl', function ($location, $scope, DogsGe
 	  
 	  
 	//TO DO - need a way to determine if any of the walk state has changed, and return true only if it has.
+	//I.e. if the date has been edited, but no new or removed walks, then this should return true.
 	$scope.hasUpdatedWalk = function() {
-	         return hasNewWalk;  
+	         return walksAreEdited;  
+	    };
+	    
+	    
+	$scope.getRowColour = function() {
+	         if(walksAreEdited == true){
+	        	 return {'background-color': "pink"};
+	         } else {
+	        	 return {color: "blue"};
+	         }
+	    };
+	    
+	    
+	$scope.saveWalks = function() {
+	         
+			console.log('Need to save the walks for dog: ' + $scope.dog.dogName);
+			
+			DogsUpdateSvc.update($scope.dog).success(function (dog) {
+				  $scope.dog = dog
+				}).success(function (dog){
+					//Again, the trick to redirect from a button click, back to the list page.  Also
+					//Needed to add the $window parameter to the controller function above
+					//TODO - make it reload the same edit page with the updated details, don't want to navigate away
+					$window.location.href='/#/' 
+				})
 	    };  
 })
  
@@ -194,13 +221,6 @@ angular.module('app').controller('DeleteCtrl', function ($location, $scope, Dogs
 	DogsDeleteSvc.delete(searchObject.dogId).success(function (dog) {
 		  $scope.dog = dog
 		})
-	
-})
-
-//Controller to update the selected dog in the database
-angular.module('app').controller('UpdateCtrl', function ($location, $scope, DogsUpdateSvc) {
- 
-	console.log('About to update Dog: ');
 	
 })
 

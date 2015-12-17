@@ -1,9 +1,35 @@
 
 <!-- Wrapped by app.html  -->
 
+<style>
+           
+            #banner {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 420px;
+                z-index: -1;
+            }
+</style>
 
   <div ng-controller='DogsCtrl' class='container'>
-    <h1>The Muttley Crew</h1><img src="./springer.jpg" alt="oh dear">
+    <center><h1>The Muttley Crew</h1><img id="banner" src="./banner.jpg" alt="oh dear"></center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <ul class='list-group'>
       <li ng-repeat='dog in dogs' class='list-group-item'>
       	<span><img ng-src="{{dog.dogPicture}}"</span>  <!-- Just grabs the string from mongo obj and loads as image -->

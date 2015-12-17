@@ -51,7 +51,7 @@ th, td {
 	    		<!-- moment stuff to get date formatting to work when bound to date object in the walk -->	
 	    		<td><input type="text"  class="datepicker" ng-model="n.walkDate" mo-date-input="DD-MMM-YYYY"/></td>
 	    		    		
-	    		<td>{{n.walkTime}}</td>
+	    		<td><input type="text" ng-model="n.walkTime"/></td>
 	    		<td><button class="remove" ng-click="removeWalk($index)">-</button></td>
 	    	</tr>
 	    </table>

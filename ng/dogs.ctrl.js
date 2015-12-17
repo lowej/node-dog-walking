@@ -6,7 +6,7 @@
 
 
 //Next 2 "directives" are an attempt to get date formatting to work
-
+//This was taken from http://plnkr.co/edit/NzeauIDVHlgeb6qF75hX?p=preview
 angular.module('app').directive('moDateInput', function ($window) {
 	
     return {
@@ -157,7 +157,9 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 	//Add a new walk line to the table
 	$scope.addNewWalk = function() {
 		
+		//Set edit flag so that screen can change highlight status
 		walksAreEdited = true;
+		
 		var currentWalkCount = $scope.dog.walks.walkArray.length;
 		var today = new Date();
 		
@@ -171,6 +173,7 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 	//Remove a walk line from the table
 	$scope.removeWalk = function(index) {
 		
+		//Set edit flag so that screen can change highlight status
 		walksAreEdited = true;
 		
 	    console.log('Going to remove walk from list at position: ' + index);

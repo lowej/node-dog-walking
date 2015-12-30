@@ -69,14 +69,17 @@ angular.module('app').directive('moChangeProxy', function ($parse) {
 
 //Load the dog list onto the screen after pulling back from service. 
 //Image is pulled back within the JSON, nothing special has to be done
-angular.module('app').controller('DogsCtrl', function ($scope, DogsSvc) {
+//$window param added by JL to enable redirection to login page.
+angular.module('app').controller('DogsCtrl', function ($window, $scope, DogsSvc) {
    
 	DogsSvc.fetch().success(function (dogs) {
 		
 		console.log('Total Number of dogs is: ' + dogs.length);
-			
-		  $scope.dogs = dogs
-		})
+		$scope.dogs = dogs;
+	}).error(function(){
+		console.log('An error occured, so redirecting to login page');
+		$window.location.href='/#/login';
+	})
 	 
 })
 
@@ -108,6 +111,10 @@ angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCre
 				$window.location.href='/#/'  
 				//JL added this href to take the user back to list page.  May be a better way of doing this.
 				//Solution is here: http://stackoverflow.com/questions/27941876/how-to-redirect-to-another-page-using-angular-js
+			}).error(function(){
+				//When an error occurs, take user to the login page
+				console.log('An error occured, so redirecting to login page');
+				$window.location.href='/#/login';
 			})
 		}
 	}

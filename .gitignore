@@ -1,5 +1,7 @@
 node_modules/
 assets/
+assets/app.js
 
 /.DS_Store
 /**/*.DS_Store
+/TODO.txt

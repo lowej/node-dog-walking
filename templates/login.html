@@ -2,7 +2,7 @@
   <form ng-submit="login(username, password)">
     <div class="form-group">
       <label>Username</label>
-      <input class="form-control" type="text" ng-model="username">
+      <input class="form-control" type="text" ng-model="username" ng-style="getTextColour()">
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -10,4 +10,8 @@
     </div>
     <input class="btn btn-success btn-lg btn-block" type="submit" value="Login">
   </form>
+  <p>
+  <p>
+  <br>
+  <h7>Login Attempts: {{getFailedLoginAttempts()}}</h7>
 </div>

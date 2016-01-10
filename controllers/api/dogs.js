@@ -77,6 +77,8 @@ router.post('/api/dog', function(req, res, next){
 	
 	var dog = new Dog({
 		dogName: req.body.dogName,
+		dogBreed: req.body.dogBreed,
+		hourlyRate: req.body.hourlyRate,
 		ownerFirstName: req.body.ownerFirstName,
 		ownerLastName: req.body.ownerLastName,
 		dogDOB: req.body.dogDOB,
@@ -95,8 +97,8 @@ router.post('/api/dog', function(req, res, next){
 })
 
 
-//Allows a dog to be updated - HTTP PUT REQUEST
-router.put('/api/dog/:id', function(req, res, next){
+//Allows a dog's walks to be updated - HTTP PUT REQUEST
+router.put('/api/dog/walks:id', function(req, res, next){
 
 	console.log('Inside the REST call with ID: ' + req.params.id);
 	
@@ -109,9 +111,41 @@ router.put('/api/dog/:id', function(req, res, next){
 	}
 	
 	//The trick was using findByIdAndUpdate 
-	//however this is just saving walks as it stands, woudld be better to save the entire dog
+	//Just saves the walks, not the other bits
 	Dog.findByIdAndUpdate(req.params.id, { $set: { walks: req.body.walks }}, function (err, tank) {
-		  if (err) return handleError(err);
+		  if (err) return next(err);
+		  res.status(200).json(Dog);
+		});
+	
+})
+
+
+//Allows a dog's top level details to be updated - HTTP PUT REQUEST
+router.put('/api/dog:id', function(req, res, next){
+
+	console.log('Inside the REST call with ID: ' + req.params.id);
+	
+	if(null == req.auth){ 
+		console.log('user is not logged in - need to redirect');
+		return res.send(401);
+	}else{
+	    var username = req.auth.username;
+		console.log('username is: ' + username);
+	}
+	
+	//The trick was using findByIdAndUpdate 
+	Dog.findByIdAndUpdate(req.params.id, { 
+		dogName: req.body.dogName, 		
+		dogBreed: req.body.dogBreed,
+		hourlyRate: req.body.hourlyRate,
+		ownerFirstName: req.body.ownerFirstName,
+		ownerLastName: req.body.ownerLastName,
+		dogDOB: req.body.dogDOB,
+		dogStartDate: req.body.dogStartDate,
+		dogPicture: req.body.dogPicture
+		
+	}, function (err, tank) {
+		  if (err) return next(err);
 		  res.status(200).json(Dog);
 		});
 	

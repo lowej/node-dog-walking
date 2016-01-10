@@ -55,21 +55,37 @@ angular.module('app').service('DogsDeleteSvc', function ($http) {
 })
 
 
+//Update walks for a dog already in the database
+angular.module('app').service('DogsUpdateWalksSvc', function ($http) {
+ 
+	
+  this.update = function (dog) {
+	  
+		console.log('Inside the angular service layer - DogsUpdateWalksSvc.  Have been asked to save dog: ' + dog.dogName); 
+		 
+		//Trick here was to pass the dog across using the "data" tag
+		return $http({
+			url: '/api/dog/walks'+dog._id, 
+			method: "PUT",
+			data:dog
+		})
+	  }
+})
+
+
 //Update a dog already in the database
 angular.module('app').service('DogsUpdateSvc', function ($http) {
  
 	
   this.update = function (dog) {
 	  
-		console.log('Inside the angular service layer.  Have been asked to save dog: ' + dog.dogName); 
+		console.log('Inside the angular service layer - DogsUpdateSvc.  Have been asked to save dog: ' + dog.dogName); 
 		 
 		//Trick here was to pass the dog across using the "data" tag
 		return $http({
-			url: '/api/dog/'+dog._id, 
+			url: '/api/dog'+dog._id, 
 			method: "PUT",
 			data:dog
 		})
 	  }
-	 
-
 })

@@ -1,0 +1,93 @@
+
+
+
+<style>
+th, td {
+	padding: 5px;
+}
+</style>
+
+<div class='container'>
+
+	<img ng-src="{{image}}" alt="">
+	<form action="">
+		<input my-upload type="file" name="upload">
+	</form>
+
+	<table cellpadding="5" border="0" style="width: 40%">
+
+		<tr>
+			<td>
+				<div class="form-group">
+				<label>Dog Name: </label>
+			</td>
+			<td>
+				<input ng-model='dog.dogName' />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+				<label>Dog Breed: </label>
+			</td>
+			<td>
+				<input ng-model='dog.dogBreed' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Dog DOB: </label>
+			</td>
+			<td><input type='text' class='datepicker' ng-model='dog.dogDOB' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Owner First Name: </label>
+			</td>
+			<td><input ng-model='dog.ownerFirstName' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Dog Last Name: </label>
+			</td>
+			<td><input ng-model='dog.ownerLastName' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Dog Start Date: </label>
+			</td>
+			<td><input type='text' class='datepicker'
+				ng-model='dog.dogStartDate' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Hourly Rate: £</label>
+			</td>
+			<td><input ng-model='dog.hourlyRate' />
+				</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="form-group">
+					<label>Dog ID: </label>
+			</td>
+			<td><label>{{dog._id}}</label>
+				</div></td>
+		</tr>
+	</table>
+	<button class='btn btn-link' ng-click="saveDog()">Save Dog</button>
+	<a class='btn btn-link' href="/#/deleteDog?dogId={{ dog._id }}">Delete
+		Dog</a>
+
+</div>
+

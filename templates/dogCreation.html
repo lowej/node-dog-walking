@@ -19,9 +19,13 @@ See https://docs.angularjs.org/guide/scope for details on $scope hierarchy
        </form>
        
        <div ng-controller='CreateCtrl' class='container'>   
-           <div class="form-group">
+        <div class="form-group">
 	      <label>Dog Name</label>
 	      <input class="form-control" type="text" ng-model="dogName">
+	    </div>
+	    <div class="form-group">
+	      <label>Dog Breed</label>
+	      <input class="form-control" type="text" ng-model="dogBreed">
 	    </div>
 	    <div class="form-group">
 	      <label>Dog Date of Birth</label>
@@ -38,6 +42,10 @@ See https://docs.angularjs.org/guide/scope for details on $scope hierarchy
 	    <div class="form-group">
 	      <label>Dog Start Date</label>
 	      <input class="form-control" type="date" ng-model="dogStartDate">
+	    </div>
+	    <div class="form-group">
+	      <label>Hourly Rate £</label>
+	      <input class="form-control" type="text" ng-model="hourlyRate">
 	    </div>
 	    <button ng-click='addDog()' class='btn btn-lg'>Add Dog</button>
 	  </form>

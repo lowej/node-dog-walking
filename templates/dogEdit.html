@@ -15,9 +15,13 @@ th, td {
 		
        <img  ng-src="{{dog.dogPicture}}" alt="">
        
-        <div class="form-group">
+	  	<div class="form-group">
 	      <label>Dog Name: </label>
 	     <label>{{dog.dogName}}</label>
+	    </div>
+	    <div class="form-group">
+	      <label>Dog Breed: </label>
+	     <label>{{dog.dogBreed}}</label>
 	    </div>
 	    <div class="form-group">
 	      <label>Dog DOB: </label>
@@ -36,9 +40,16 @@ th, td {
 	     <label>{{dog.dogStartDate | date:mediumDate}}</label>
 	    </div>
 	    <div class="form-group">
+	      <label>Hourly Rate: £</label>
+	     <label>{{dog.hourlyRate}}</label>
+	    </div>
+	    <div class="form-group">
 	      <label>Dog ID: </label>
 	     <label>{{dog._id}}</label>
 	    </div>
+	    <a class='btn btn-sm' href="/#/editDogDetails?dogName={{ dog.dogName }}">Edit Dog Details</a>
+	    <br>
+	    <br>
 	    
 	    <table cellpadding="5" border="3" style="width:100%">
 	    	<tr>
@@ -56,15 +67,9 @@ th, td {
 	    	</tr>
 	    </table>
 	    
-	    <button  class='btn btn-lg' ng-click="addNewWalk()">Add New Walk</button>
-	    <button ng-show="hasUpdatedWalk()" class='btn btn-lg' ng-click="saveWalks()">Save Walks</button>
+	    <button  class='btn btn-sm' ng-click="addNewWalk()">Add New Walk</button>
+	    <button ng-show="hasUpdatedWalk()" class='btn btn-sm' ng-click="saveWalks()">Save Walks</button>
 	
-	    
-	   <br>
-	   <br>
-	   <br>
-	   <br>
-	    <a class='btn btn-lg' href="/#/deleteDog?dogId={{ dog._id }}"> Delete Dog</a>
       
  </div>
  

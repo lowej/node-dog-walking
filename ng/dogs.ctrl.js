@@ -101,6 +101,8 @@ angular.module('app').controller('CreateCtrl', function ($window, $scope, DogCre
 		if($scope.dogName){   //Create the JSON object to send to the service call
 			DogCreationSvc.create({
 				dogName: $scope.dogName, 
+				dogBreed: $scope.dogBreed, 
+				hourlyRate: $scope.hourlyRate,
 				ownerFirstName: $scope.ownerFirstName, 
 				ownerLastName: $scope.ownerSurname, 
 				dogDOB:$scope.dogDOB,
@@ -144,8 +146,8 @@ angular.module('app').controller('UploadCtrl', ['$scope', function ($scope) {
 
 
 
-//Controller to take the selected dog and show an edit page for that dog
-angular.module('app').controller('EditCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateSvc) {
+//Controller to take the selected dog and show an edit page for that dog's walks
+angular.module('app').controller('EditCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateWalksSvc) {
  
 	//TO DO - is this variable thread safe???
 	var walksAreEdited = false;
@@ -210,7 +212,7 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 	         
 			console.log('Need to save the walks for dog: ' + $scope.dog.dogName);
 			
-			DogsUpdateSvc.update($scope.dog).success(function (dog) {
+			DogsUpdateWalksSvc.update($scope.dog).success(function (dog) {
 				  $scope.dog = dog
 				}).success(function (dog){
 					//Again, the trick to redirect from a button click, back to the list page.  Also
@@ -220,7 +222,47 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 				})
 	    };  
 })
+
+
+
+
+//Controller to take the selected dog and show an edit details page for that dog - NEW
+angular.module('app').controller('EditDetailCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateSvc) {
  
+	//Get the dog name from the query string - TODO - make this the dog unique ID In future.
+	var searchObject = $location.search();
+	
+	
+	DogsGetOneSvc.fetch(searchObject.dogName).success(function (dog) {
+		  $scope.dog = dog
+		  
+		  //The temp image holder needs to be set if dog image already exists.
+		  if(dog.dogPicture !== undefined){
+			  $scope.image = dog.dogPicture;
+		  }
+		})
+		
+		
+	$scope.saveDog = function() {
+        
+		console.log('Need to save the top level dog details for dog: ' + $scope.dog.dogName);
+		
+		//Take the temp image holder and set this on the dog.
+		$scope.dog.dogPicture = $scope.image;
+		
+		DogsUpdateSvc.update($scope.dog).success(function (dog) {
+			  $scope.dog = dog
+			}).success(function (dog){
+				//Again, the trick to redirect from a button click, back to the list page.  Also
+				//Needed to add the $window parameter to the controller function above
+				//TODO - make it reload the same edit page with the updated details, don't want to navigate away
+				$window.location.href='/#/' 
+			})
+    };  
+})
+ 
+
+
 //Controller to delete the selected dog from the database
 angular.module('app').controller('DeleteCtrl', function ($location, $scope, DogsDeleteSvc) {
  

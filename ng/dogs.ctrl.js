@@ -277,3 +277,16 @@ angular.module('app').controller('DeleteCtrl', function ($location, $scope, Dogs
 })
 
 
+//Controller to export all the walks from the database
+angular.module('app').controller('exportWalksCtrl', function ($location, $scope, ExportWalksSvc) {
+ 
+
+	
+	//Remove the dog from the database
+	ExportWalksSvc.export().success(function (csv) {
+		  $scope.csv = csv
+		})
+	
+})
+
+

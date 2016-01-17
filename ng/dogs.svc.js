@@ -89,3 +89,16 @@ angular.module('app').service('DogsUpdateSvc', function ($http) {
 		})
 	  }
 })
+
+
+
+
+
+//Export all the walks from the database
+angular.module('app').service('ExportWalksSvc', function ($http) {
+ 
+	
+	this.export = function () {
+	    return $http.get('api/dogs/csv');
+	  }
+})

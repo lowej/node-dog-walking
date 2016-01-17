@@ -13,5 +13,6 @@ angular.module('app')
    .when('/updateDog', { controller: 'UpdateCtrl', templateUrl: 'dogList.html'})
    .when('/login', { controller: 'LoginCtrl', templateUrl: 'login.html' })
    .when('/editDogDetails', { controller: 'EditDetailCtrl', templateUrl: 'dogEditDetails.html' })
+   .when('/exportWalks', { controller: 'exportWalksCtrl', templateUrl: 'walkExport.html' })
 })
 

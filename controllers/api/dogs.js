@@ -3,8 +3,9 @@
 //Node controller for serving up the business services to presentation tier
 //HTTP RESTful API 
 
-var Dog = require('../../models/dog')
-var router = require('express').Router()
+var Dog = require('../../models/dog');
+var router = require('express').Router();
+var csv = require('express-csv');
 
 //Allows all dogs in DB to be returned - HTTP GET REQUEST
 router.get('/api/dogs', function (req, res, next) {
@@ -22,6 +23,51 @@ router.get('/api/dogs', function (req, res, next) {
 		res.json(dog)
 	})
 })
+
+
+//Allows all dogs in DB to be returned - HTTP GET REQUEST
+router.get('/api/dogs/csv', function (req, res, next) {
+ 
+	if(null == req.auth){
+		console.log('user is not logged in - need to redirect');
+		return res.send(401);
+	}else{
+	    var username = req.auth.username;
+		console.log('username is: ' + username);
+	}
+	
+	
+	var csvData = new Array();
+	var lineCounter=0;
+	
+	Dog.find(function(err, dog){
+		if(err){return next(err)}
+		
+		
+		for(i in dog){
+			console.log("have a dog: " + dog[i].dogName);
+			var dogWalks = dog[i].walks.walkArray;
+			for(j in dogWalks){
+				
+				if(dogWalks[j].walkDate !== undefined){
+					csvData[lineCounter] = new Array();
+					csvData[lineCounter][0]=dog[i]._id;
+					csvData[lineCounter][1]=dog[i].dogName;
+					csvData[lineCounter][2]=dog[i].ownerLastName;
+					var dt = dogWalks[j].walkDate;
+					csvData[lineCounter][3]=dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
+					csvData[lineCounter][4]=dogWalks[j].walkTime;
+					console.log('date and time '+ dogWalks[j].walkDate +' '+ dogWalks[j].walkTime);
+					lineCounter++;
+				}
+			}
+		}
+		
+		res.csv(csvData);
+	})
+	
+})
+
 
 //Returns a single dog based on the dogName passed to it
 //Obvious issue with this is if there are more than one dogs with the same name 

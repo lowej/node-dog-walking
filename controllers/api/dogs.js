@@ -50,15 +50,19 @@ router.get('/api/dogs/csv', function (req, res, next) {
 			for(j in dogWalks){
 				
 				if(dogWalks[j].walkDate !== undefined){
-					csvData[lineCounter] = new Array();
-					csvData[lineCounter][0]=dog[i]._id;
-					csvData[lineCounter][1]=dog[i].dogName;
-					csvData[lineCounter][2]=dog[i].ownerLastName;
+					
 					var dt = dogWalks[j].walkDate;
-					csvData[lineCounter][3]=dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
-					csvData[lineCounter][4]=dogWalks[j].walkTime;
-					console.log('date and time '+ dogWalks[j].walkDate +' '+ dogWalks[j].walkTime);
-					lineCounter++;
+					if(dt != null){
+						csvData[lineCounter] = new Array();
+						csvData[lineCounter][0]=dog[i]._id;
+						csvData[lineCounter][1]=dog[i].dogName;
+						csvData[lineCounter][2]=dog[i].ownerLastName;
+						
+						csvData[lineCounter][3]=dt.getDate()+'/'+(dt.getMonth()+1)+'/'+dt.getFullYear();
+						csvData[lineCounter][4]=dogWalks[j].walkTime;
+						console.log('date and time '+ dogWalks[j].walkDate +' '+ dogWalks[j].walkTime);
+						lineCounter++;
+					}
 				}
 			}
 		}

@@ -13,7 +13,8 @@ var Dog = db.model('Dog', {
 	 walkArray:	[
 	           	 {
 	           		 walkDate: {type: Date},
-	           		 walkTime: {type: String}
+	           		 walkTime: {type: String},
+	           		 hourlyRate: {type: Number, required: false, default: 0.0}
 	           	 }
 	           	 ]
   }

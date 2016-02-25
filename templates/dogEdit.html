@@ -55,6 +55,7 @@ th, td {
 	    	<tr>
 	    		<td><h5>Walk Date</h5></td>
 	    		<td><h5>Time Walk Took (Minutes)</h5></td>
+	    		<td><h5>Current Hourly Rate</h5></td>
 	    		<td><h5>Remove</h5></td>
 	    	</tr>
 	    	<tr ng-style="getRowColour()" ng-repeat='n in dog.walks.walkArray'>
@@ -63,6 +64,7 @@ th, td {
 	    		<td><input type="text"  class="datepicker" ng-model="n.walkDate" mo-date-input="DD-MMM-YYYY"/></td>
 	    		    		
 	    		<td><input type="text" ng-model="n.walkTime"/></td>
+	    		<td><input type="text" ng-model="n.hourlyRate"/></td>
 	    		<td><button class="remove" ng-click="removeWalk($index)">-</button></td>
 	    	</tr>
 	    </table>

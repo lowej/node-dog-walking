@@ -172,7 +172,8 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 		var currentWalkCount = $scope.dog.walks.walkArray.length;
 		var today = new Date();
 		
-		$scope.dog.walks.walkArray.push({'walkDate':today, 'walkTime': '60'});
+		//Pop data onto the new walk.  Default to walk date of today, time of 60 mins and hourly rate = current dog level hourly rate
+		$scope.dog.walks.walkArray.push({'walkDate':today, 'walkTime': '60', 'hourlyRate':$scope.dog.hourlyRate});
 
 	    console.log('adding a new walk, now have: ' + (currentWalkCount+1));
 
@@ -226,7 +227,7 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 
 
 
-//Controller to take the selected dog and show an edit details page for that dog - NEW
+//Controller to take the selected dog and show an edit details page for the dog (not the walks, but the dog) - NEW
 angular.module('app').controller('EditDetailCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateSvc) {
  
 	//Get the dog name from the query string - TODO - make this the dog unique ID In future.

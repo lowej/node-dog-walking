@@ -146,8 +146,38 @@ angular.module('app').controller('UploadCtrl', ['$scope', function ($scope) {
 
 
 
+
 //Controller to take the selected dog and show an edit page for that dog's walks
 angular.module('app').controller('EditCtrl', function ($window, $location, $scope, DogsGetOneSvc, DogsUpdateWalksSvc) {
+	
+	///Putting the Pagination code here
+	$scope.curPage = 0;
+	$scope.pageSize = 10;
+	
+	
+	//Added this function to try and get rid  Error: [$interpolate:interr] Can't interpolate: Page {{getCurPage() + 1}} of {{ numberOfPages() }}
+	//See http://stackoverflow.com/questions/20432127/angularjs-interpolation-error
+	$scope.getCurPage = function (){
+		
+		if(undefined === $scope.curPage ){
+			return 0;
+		}else{
+			return $scope.curPage ;
+		}
+	};
+	
+
+	 $scope.numberOfPages = function() {
+		
+		 //Added this check to get rid of Error: [$interpolate:interr] Can't interpolate: Page {{getCurPage() + 1}} of {{ numberOfPages() }}
+		 //See http://stackoverflow.com/questions/20432127/angularjs-interpolation-error
+		if(undefined === $scope.dog){
+			return 0;
+		}
+		 
+	    return Math.ceil($scope.dog.walks.walkArray.length / $scope.pageSize);
+	  };
+
  
 	//TO DO - is this variable thread safe???
 	var walksAreEdited = false;
@@ -176,9 +206,16 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 		$scope.dog.walks.walkArray.push({'walkDate':today, 'walkTime': '60', 'hourlyRate':$scope.dog.hourlyRate});
 
 	    console.log('adding a new walk, now have: ' + (currentWalkCount+1));
-
+	    
+	    console.log('$scope.curPage = ' + $scope.curPage);
+	    console.log('$scope.numberOfPages() = ' + $scope.numberOfPages());
+	    
+	    if($scope.curPage !=  $scope.numberOfPages()-1){
+	    	$scope.curPage =  $scope.numberOfPages()-1;
+	    }
 	    
 	  };
+	  
 	  
 	//Remove a walk line from the table
 	$scope.removeWalk = function(index) {
@@ -186,9 +223,12 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 		//Set edit flag so that screen can change highlight status
 		walksAreEdited = true;
 		
-	    console.log('Going to remove walk from list at position: ' + index);
+		//Need to calculate the correct dog to remove based on which page user is currently on
+		var removalPosition = ($scope.curPage * $scope.pageSize) + index;
 		
-		$scope.dog.walks.walkArray.splice(index, 1);
+	    console.log('Going to remove walk from list at position: ' + removalPosition);
+	    
+		$scope.dog.walks.walkArray.splice(removalPosition, 1);
 		
 	  };
 	  
@@ -222,7 +262,23 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 					$window.location.href='/#/' 
 				})
 	    };  
+	    
 })
+
+
+//This is the filter that is used in the paginated ng-repeat directive
+angular.module('app').filter('pagination', function(){
+ return function(input, start){
+	 
+	 //JL added this check to simply return if input is undefined
+	 if(input === undefined){
+		 return;
+	 }
+		 	
+  start = +start;
+  return input.slice(start);
+ };
+});
 
 
 

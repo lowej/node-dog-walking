@@ -58,7 +58,7 @@ th, td {
 	    		<td><h5>Current Hourly Rate</h5></td>
 	    		<td><h5>Remove</h5></td>
 	    	</tr>
-	    	<tr ng-style="getRowColour()" ng-repeat='n in dog.walks.walkArray'>
+	    	<tr ng-style="getRowColour()" ng-repeat="n in dog.walks.walkArray | pagination: curPage * pageSize | limitTo: pageSize"> 
 	    		
 	    		<!-- moment stuff to get date formatting to work when bound to date object in the walk -->	
 	    		<td><input type="text"  class="datepicker" ng-model="n.walkDate" mo-date-input="DD-MMM-YYYY"/></td>
@@ -68,6 +68,27 @@ th, td {
 	    		<td><button class="remove" ng-click="removeWalk($index)">-</button></td>
 	    	</tr>
 	    </table>
+	    <h7><i>Total number of items in list is: {{dog.walks.walkArray.length}} </i></h7>
+	    <br><br>
+	    <!--  div class="pagination-div" ng-show="dog.walks.walkArray.length"> -->
+
+
+		  <button type="button" ng-disabled="curPage == 0"
+		 ng-click="curPage=curPage-1">PREV</button>
+
+		
+		<!--  <span>Page {{curPage + 1}} of {{ numberOfPages() }}</span>--> 
+		
+		<span>Page {{getCurPage() + 1}} of {{ numberOfPages() }}</span>
+		
+		 <button type="button"
+		 ng-disabled="curPage >= dog.walks.walkArray.length/pageSize - 1"
+		 ng-click="curPage = curPage+1">NEXT </button>
+
+
+		<!-- </div>  -->
+	    
+	    <br><br>
 	    
 	    <button  class='btn btn-sm' ng-click="addNewWalk()">Add New Walk</button>
 	    <button ng-show="hasUpdatedWalk()" class='btn btn-sm' ng-click="saveWalks()">Save Walks</button>

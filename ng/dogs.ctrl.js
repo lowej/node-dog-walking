@@ -169,6 +169,10 @@ angular.module('app').controller('EditCtrl', function ($window, $location, $scop
 
 	 $scope.numberOfPages = function() {
 		
+		 console.log('=====$scope.dog = ' + $scope.dog);
+		 console.log('=====$scope.pageSize = ' + $scope.pageSize);
+		 console.log('=====$scope.dog.walks.walkArray.length = ' + $scope.dog.walks.walkArray.length);
+		 
 		 //Added this check to get rid of Error: [$interpolate:interr] Can't interpolate: Page {{getCurPage() + 1}} of {{ numberOfPages() }}
 		 //See http://stackoverflow.com/questions/20432127/angularjs-interpolation-error
 		if(undefined === $scope.dog){
